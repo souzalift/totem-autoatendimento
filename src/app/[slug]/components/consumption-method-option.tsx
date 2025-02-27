@@ -6,29 +6,39 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface ConsumptionMethodOptionProps {
+  slug: string;
   imageUrl: string;
   imageAlt: string;
   buttonText: string;
-  option: ConsumptionMethod; 
+  option: ConsumptionMethod;
 }
 
-const ConsumptionMethodOption = ({imageAlt, imageUrl, buttonText, option}: ConsumptionMethodOptionProps) => {
+const ConsumptionMethodOption = ({
+  slug,
+  imageAlt,
+  imageUrl,
+  buttonText,
+  option,
+}: ConsumptionMethodOptionProps) => {
   return (
     <Card>
-      <Link href={`/menu?ConsumptionMethod=${option}`}>
       <CardContent className="flex flex-col items-center gap-8 py-8">
-        <Image
-          src={imageUrl}
-          alt={imageAlt}
-          width={64}height={64}
-          className="object-contain"
+        <div className="relative h-[80px] w-[80px]">
+          <Image
+            src={imageUrl}
+            fill
+            alt={imageAlt}
+            className="object-contain"
           />
-        <Button variant="secondary" className="rounded-full">
-          {buttonText}
+        </div>
+        <Button variant="secondary" className="rounded-full" asChild>
+          <Link href={`/${slug}/menu?consumptionMethod=${option}`}>
+            {buttonText}
+          </Link>
         </Button>
       </CardContent>
-      </Link>
     </Card>
   );
-}
+};
+
 export default ConsumptionMethodOption;
